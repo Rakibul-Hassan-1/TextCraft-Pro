@@ -1,0 +1,40 @@
+1
+00:00:06,000 --> 00:00:10,000
+Hello everyone, I am Li Xinyuan, a Huawei lecturer.
+
+2
+00:00:10,000 --> 00:00:14,000
+In the last class, we talked about the technical knowledge of VRP,
+
+3
+00:00:14,000 --> 00:00:18,000
+And the upgrade method of AC and AP devices.
+
+4
+00:00:18,000 --> 00:00:23,000
+In that lesson, let's talk about WLAN's knowledge.
+
+5
+00:00:23,000 --> 00:00:31,000
+In public places, WLAN is now a wide range of contact methods.
+
+6
+00:00:31,000 --> 00:00:36,000
+As more and more people apply WLAN to access,
+
+7
+00:00:36,000 --> 00:00:42,000
+And our security requirements for WLAN will become higher and higher.
+
+8
+00:00:42,000 --> 00:00:45,000
+So in this section, I will tell you about it
+
+9
+00:00:45,000 --> 00:00:52,000
+Some of WLAN's access to security, data security and configuration security related knowledge.
+
+10
+00:00:52,000 --> 00:00:55,000
+Let's take a look together.
+
