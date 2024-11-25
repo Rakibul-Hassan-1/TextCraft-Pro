@@ -60,6 +60,7 @@ python main.py
 ## **Screenshots**
 
 _![alt text](image-1.png)_
+_![alt text](image-3.png)_
 _![alt text](image-2.png)_
 
 ---
