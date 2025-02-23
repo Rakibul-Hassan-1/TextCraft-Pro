@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Codeforces Profile Comparison</title>
+
+    <!-- Bootstrap CSS for Basic Layout -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- AOS - Animation on Scroll -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+      rel="stylesheet"
+    />
+
+    <!-- SweetAlert2 for interactive alerts -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.min.css"
+    />
+
+    <!-- GSAP for complex animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+
+    <!-- Particles.js for dynamic background -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <!-- Custom Styles -->
+    <style>
+      body {
+        background: #000;
+        color: #fff;
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+
+      .container {
+        position: relative;
+        z-index: 10;
+        padding: 30px 20px;
+      }
+
+      /* Dynamic Background */
+      #particles-js {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+
+      .title {
+        text-align: center;
+        font-size: 48px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #00bfff;
+        animation: fadeIn 2s ease-out;
+      }
+
+      .subtitle {
+        text-align: center;
+        font-size: 20px;
+        color: #f0f0f0;
+        margin-bottom: 30px;
+        animation: fadeIn 3s ease-out;
+      }
+
+      /* Profile Card */
+      .profile-card {
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 20px;
+        padding: 30px;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.2);
+        position: relative;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .profile-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      .profile-img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 20px;
+        transition: all 0.4s ease;
+      }
+
+      .profile-img:hover {
+        transform: scale(1.2);
+        filter: brightness(1.2);
+      }
+
+      .btn-custom {
+        background: green;
+        border: none;
+        border-radius: 30px;
+        padding: 15px 30px;
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: transform 0.3s ease, background 0.3s ease;
+      }
+
+      .btn-custom:hover {
+        transform: translateY(-10px);
+        background: green;
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .profile-card .content-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      /* Fix the profile card collapsing */
+      .profile-card-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin-top: 50px;
+      }
+
+      /* Flex for profile cards */
+      .profile-card-container .col-lg-6 {
+        flex: 1 1 calc(50% - 30px);
+        max-width: calc(50% - 30px);
+        margin-bottom: 30px;
+      }
+
+      /* Adjust layout for small screens */
+      @media (max-width: 768px) {
+        .profile-card-container .col-lg-6 {
+          flex: 1 1 100%;
+          max-width: 100%;
+        }
+        /* Extreme animation for title */
+        @keyframes extremeTitle {
+          0% {
+            opacity: 0;
+            transform: scale(0.5) rotate(-30deg) translateY(-100px);
+            color: #ff0000;
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.2) rotate(30deg) translateY(0);
+            color: #00bfff;
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1) rotate(0) translateY(0);
+            color: #00bfff;
+          }
+        }
+
+        /* Extreme animation for subtitle */
+        @keyframes extremeSubtitle {
+          0% {
+            opacity: 0;
+            transform: scale(0.5) rotate(30deg) translateY(100px);
+            color: #f0f0f0;
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.1) rotate(-20deg) translateY(0);
+            color: #ffff00;
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1) rotate(0) translateY(0);
+            color: #f0f0f0;
+          }
+        }
+
+        .title {
+          text-align: center;
+          font-size: 48px;
+          font-weight: bold;
+          text-transform: uppercase;
+          animation: extremeTitle 3s ease-out forwards;
+        }
+
+        .subtitle {
+          text-align: center;
+          font-size: 20px;
+          margin-bottom: 30px;
+          animation: extremeSubtitle 3.5s ease-out forwards;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Dynamic Background using Particles.js -->
+    <div id="particles-js"></div>
+
+    <div class="container">
+      <h1 class="title animate__animated animate__fadeIn">
+        Codeforces Profile Comparison
+      </h1>
+      <p class="subtitle animate__animated animate__fadeIn">
+        Enter two usernames to compare their profiles
+      </p>
+
+      <form
+        id="comparison-form"
+        method="POST"
+        class="animate__animated animate__fadeIn"
+      >
+        <div class="mb-3">
+          <label for="username1" class="form-label"
+            >Enter the first Codeforces username:</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="username1"
+            name="username1"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="username2" class="form-label"
+            >Enter the second Codeforces username:</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="username2"
+            name="username2"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-custom w-100">Compare</button>
+      </form>
+
+      <div id="loading" class="text-center mt-4" style="display: none">
+        <div class="spinner-border text-light" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
+      <!-- Profile Cards will appear here -->
+      <div id="profiles-container" class="profile-card-container mt-5"></div>
+    </div>
+
+    <!-- Add custom styles and effects -->
+    <style>
+      .profile-card-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 30px;
+        margin-top: 50px;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .profile-card-container .col-lg-6 {
+        flex: 1;
+        max-width: calc(50% - 30px);
+        margin-bottom: 30px;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .profile-card {
+        background: rgba(19, 19, 19, 0.9);
+        border-radius: 20px;
+        padding: 20px;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+        position: relative;
+        z-index: 10;
+        overflow: hidden;
+        transform: scale(1);
+      }
+
+      .profile-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 20px 40px rgba(0, 255, 255, 0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .profile-title {
+        color: #1f8ff8;
+        text-align: center;
+        font-size: 22px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        transition: color 0.3s ease;
+      }
+
+      .profile-title:hover {
+        color: #0ff;
+      }
+
+      .profile-img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto;
+        display: block;
+        transition: all 0.4s ease;
+      }
+
+      .profile-img:hover {
+        transform: scale(1.1);
+        filter: brightness(1.2);
+      }
+
+      .profile-info {
+        text-align: center;
+        color: #bbb;
+        margin-top: 15px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease-out;
+      }
+
+      .profile-card:hover .profile-info {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .profile-info p {
+        margin: 8px 0;
+      }
+    </style>
+
+    <!-- Bootstrap JS for Form functionality -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- SweetAlert2 for showing messages -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+
+    <!-- GSAP animation library -->
+    <script>
+      window.onload = function () {
+        // Animate the title with extreme effects
+        gsap.from(".title", {
+          opacity: 0,
+          scale: 0.5,
+          rotation: -60,
+          y: -100,
+          duration: 2,
+          ease: "bounce.out",
+          color: "#ff0000", // Change color initially
+          onComplete: () => {
+            gsap.to(".title", {
+              color: "#00bfff", // Final color
+              duration: 0.5,
+            });
+          },
+        });
+
+        // Animate the subtitle with extreme effects
+        gsap.from(".subtitle", {
+          opacity: 0,
+          scale: 0.5,
+          rotation: 60,
+          y: 100,
+          duration: 2.5,
+          delay: 0.5,
+          ease: "bounce.out",
+          color: "#f0f0f0", // Initial color
+          onComplete: () => {
+            gsap.to(".subtitle", {
+              color: "#ffff00", // Final color
+              duration: 0.5,
+            });
+          },
+        });
+      };
+
+      // Particle.js background effect
+      particlesJS("particles-js", {
+        particles: {
+          number: {
+            value: 100,
+            density: { enable: true, value_area: 1000 },
+          },
+          color: { value: "#ffffff" },
+          shape: {
+            type: "circle",
+          },
+          opacity: {
+            value: 0.4,
+            random: true,
+            anim: {
+              enable: true,
+              speed: 1,
+              opacity_min: 0.1,
+              sync: false,
+            },
+          },
+          size: {
+            value: 5,
+            random: true,
+            anim: { enable: true, speed: 40, size_min: 0.1, sync: false },
+          },
+          line_linked: {
+            enable: true,
+            distance: 100,
+            color: "#ffffff",
+            opacity: 0.4,
+            width: 1,
+          },
+        },
+        interactivity: {
+          events: {
+            onhover: {
+              enable: true,
+              mode: "repulse",
+            },
+            onclick: {
+              enable: true,
+              mode: "push",
+            },
+          },
+          modes: {
+            repulse: {
+              distance: 100,
+              duration: 0.4,
+            },
+            push: {
+              particles_nb: 4,
+            },
+          },
+        },
+      });
+    </script>
+
+    <script>
+      // Handle form submission with validation and AJAX
+      document
+        .getElementById("comparison-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          let username1 = document.getElementById("username1").value.trim();
+          let username2 = document.getElementById("username2").value.trim();
+
+          // Show loading spinner
+          document.getElementById("loading").style.display = "block";
+          document.getElementById("profiles-container").innerHTML = "";
+
+          fetch(
+            `https://codeforces.com/api/user.info?handles=${username1};${username2}`
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              // Hide loading spinner
+              document.getElementById("loading").style.display = "none";
+
+              if (data.status === "OK") {
+                let user1 = data.result[0];
+                let user2 = data.result[1];
+
+                // Display profiles dynamically
+                let profilesHtml = `
+                  <div class="col-lg-6">
+                    <div class="profile-card">
+                      <img src="${user1.avatar}" class="profile-img" alt="Profile Picture" />
+                      <div class="content-wrapper">
+                        <h3 class="profile-title">${user1.handle}</h3>
+                        <div class="profile-info">
+                          <p><strong>Rank:</strong> ${user1.rank}</p>
+                          <p><strong>Rating:</strong> ${user1.rating}</p>
+                          <p><strong>Max Rating:</strong> ${user1.maxRating}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="profile-card">
+                      <img src="${user2.avatar}" class="profile-img" alt="Profile Picture" />
+                      <div class="content-wrapper">
+                        <h3 class="profile-title">${user2.handle}</h3>
+                        <div class="profile-info">
+                          <p><strong>Rank:</strong> ${user2.rank}</p>
+                          <p><strong>Rating:</strong> ${user2.rating}</p>
+                          <p><strong>Max Rating:</strong> ${user2.maxRating}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                `;
+
+                document.getElementById("profiles-container").innerHTML =
+                  profilesHtml;
+              } else {
+                Swal.fire({
+                  icon: "error",
+                  title: "Error",
+                  text: "One or both usernames are invalid.",
+                });
+              }
+            })
+            .catch((error) => {
+              // Hide loading spinner
+              document.getElementById("loading").style.display = "none";
+              Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Something went wrong! Please try again later.",
+              });
+            });
+        });
+    </script>
+  </body>
+</html>

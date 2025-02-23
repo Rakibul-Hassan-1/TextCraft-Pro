@@ -1,0 +1,164 @@
+/* src/components/Visualizer.css */
+
+/* General styling for visualizer components */
+.visualizer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  width: 80%;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+}
+
+/* Algorithm title styling */
+.algorithm-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Styling for the graph (BFS) nodes */
+.graph-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.node {
+  padding: 20px;
+  margin: 10px;
+  background-color: #61dafb;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 60px;
+}
+
+/* Highlight visited nodes (BFS) */
+.node.visited {
+  background-color: #ff6347;
+}
+
+/* Highlight the nodes that are currently being processed */
+.node.highlight {
+  background-color: #ff6347;
+}
+
+/* Controls section */
+.controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.controls button {
+  padding: 10px 15px;
+  margin: 0 10px;
+  background-color: #61dafb;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  min-width: 100px;
+}
+
+.controls button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.controls button:hover {
+  background-color: #4fa3f7;
+}
+
+/* Statistics display (comparisons and swaps) */
+.statistics {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+  color: #333;
+}
+
+/* Styling for the array bars (Bubble Sort, Quick Sort) */
+.array-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.array-bar {
+  width: 40px;
+  height: 100px;
+  background-color: #61dafb;
+  margin: 0 5px;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+}
+
+/* Styling for the array bars when being processed (Bubble Sort and Quick Sort) */
+.array-bar.processing {
+  background-color: #ff6347;
+}
+
+/* Styling for completed sorting bars */
+.array-bar.sorted {
+  background-color: #32cd32;
+}
+
+/* Animation for the sorting bars */
+.array-bar {
+  transition: all 0.3s ease;
+}
+
+/* Styling for the node highlight when Quick Sort Pivot is selected */
+.node.highlight {
+  background-color: #ff6347;
+}
+
+/* General layout for visualizers (e.g., Bubble Sort, Quick Sort) */
+.visualizer {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Styling for the algorithm name */
+.algorithm-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+  .visualizer {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .node {
+    padding: 15px;
+    margin: 5px;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .controls button {
+    margin: 10px 0;
+  }
+}

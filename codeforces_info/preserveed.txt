@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Codeforces Profile Comparison</title>
+
+    <!-- Bootstrap CSS for Basic Layout -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- AOS - Animation on Scroll -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+      rel="stylesheet"
+    />
+
+    <!-- SweetAlert2 for interactive alerts -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.min.css"
+    />
+
+    <!-- GSAP for complex animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+
+    <!-- Particles.js for dynamic background -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <!-- Custom Styles -->
+    <style>
+      body {
+        background: #000;
+        color: #fff;
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+
+      .container {
+        position: relative;
+        z-index: 10;
+        padding: 30px 20px;
+      }
+
+      /* Dynamic Background */
+      #particles-js {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+
+      .title {
+        text-align: center;
+        font-size: 48px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #00bfff;
+        animation: fadeIn 2s ease-out;
+      }
+
+      .subtitle {
+        text-align: center;
+        font-size: 20px;
+        color: #f0f0f0;
+        margin-bottom: 30px;
+        animation: fadeIn 3s ease-out;
+      }
+
+      /* Profile Card */
+      .profile-card {
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 20px;
+        padding: 30px;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.2);
+        position: relative;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .profile-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      .profile-img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 20px;
+        transition: all 0.4s ease;
+      }
+
+      .profile-img:hover {
+        transform: scale(1.2);
+        filter: brightness(1.2);
+      }
+
+      .btn-custom {
+        background: green;
+        border: none;
+        border-radius: 30px;
+        padding: 15px 30px;
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: transform 0.3s ease, background 0.3s ease;
+      }
+
+      .btn-custom:hover {
+        transform: translateY(-10px);
+        background: green;
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .profile-card .content-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      /* Fix the profile card collapsing */
+      .profile-card-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin-top: 50px;
+      }
+
+      /* Flex for profile cards */
+      .profile-card-container .col-lg-6 {
+        flex: 1 1 calc(50% - 30px);
+        max-width: calc(50% - 30px);
+        margin-bottom: 30px;
+      }
+
+      /* Adjust layout for small screens */
+      @media (max-width: 768px) {
+        .profile-card-container .col-lg-6 {
+          flex: 1 1 100%;
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Dynamic Background using Particles.js -->
+    <div id="particles-js"></div>
+
+    <div class="container">
+      <h1 class="title animate__animated animate__fadeIn">
+        Codeforces Profile Comparison
+      </h1>
+      <p class="subtitle animate__animated animate__fadeIn">
+        Enter two usernames to compare their profiles
+      </p>
+
+      <form method="POST" class="animate__animated animate__fadeIn">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="username1" class="form-label"
+            >Enter the first Codeforces username:</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="username1"
+            name="username1"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="username2" class="form-label"
+            >Enter the second Codeforces username:</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="username2"
+            name="username2"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-custom w-100">Compare</button>
+      </form>
+
+      {% if details1 and details2 %}
+      <div class="profile-card-container mt-5">
+        <!-- Profile 1 -->
+        <div class="col-lg-6" data-aos="zoom-in-up">
+          <div class="profile-card">
+            <h3 class="profile-title">{{ details1.handle }}</h3>
+            <div class="content-wrapper">
+              {% if details1.avatar %}
+              <img
+                src="{{ details1.avatar }}"
+                alt="Profile Picture"
+                class="profile-img"
+              />
+              {% else %}
+              <img
+                src="https://via.placeholder.com/120"
+                alt="Profile Picture"
+                class="profile-img"
+              />
+              {% endif %}
+              <div class="profile-info">
+                <p><strong>Rank:</strong> {{ details1.rank }}</p>
+                <p><strong>Rating:</strong> {{ details1.rating }}</p>
+                <p><strong>Max Rating:</strong> {{ details1.max_rating }}</p>
+                <p><strong>Country:</strong> {{ details1.country }}</p>
+                <p>
+                  <strong>Contribution:</strong> {{ details1.contribution }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile 2 -->
+        <div class="col-lg-6" data-aos="zoom-in-up">
+          <div class="profile-card">
+            <h3 class="profile-title">{{ details2.handle }}</h3>
+            <div class="content-wrapper">
+              {% if details2.avatar %}
+              <img
+                src="{{ details2.avatar }}"
+                alt="Profile Picture"
+                class="profile-img"
+              />
+              {% else %}
+              <img
+                src="https://via.placeholder.com/120"
+                alt="Profile Picture"
+                class="profile-img"
+              />
+              {% endif %}
+              <div class="profile-info">
+                <p><strong>Rank:</strong> {{ details2.rank }}</p>
+                <p><strong>Rating:</strong> {{ details2.rating }}</p>
+                <p><strong>Max Rating:</strong> {{ details2.max_rating }}</p>
+                <p><strong>Country:</strong> {{ details2.country }}</p>
+                <p>
+                  <strong>Contribution:</strong> {{ details2.contribution }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% endif %}
+    </div>
+
+    <!-- Add custom styles and effects -->
+
+    <style>
+      .profile-card-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 30px;
+        margin-top: 50px;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .profile-card-container .col-lg-6 {
+        flex: 1;
+        max-width: calc(50% - 30px);
+        margin-bottom: 30px;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .profile-card {
+        background: rgba(19, 19, 19, 0.9);
+        border-radius: 20px;
+        padding: 20px;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+        position: relative;
+        z-index: 10;
+        overflow: hidden;
+        transform: scale(1);
+      }
+
+      .profile-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 20px 40px rgba(0, 255, 255, 0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .profile-title {
+        color: #1f8ff8;
+        text-align: center;
+        font-size: 22px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        transition: color 0.3s ease;
+      }
+
+      .profile-title:hover {
+        color: #0ff;
+      }
+
+      .profile-img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto;
+        display: block;
+        transition: all 0.4s ease;
+      }
+
+      .profile-img:hover {
+        transform: scale(1.1);
+        filter: brightness(1.2);
+      }
+
+      .profile-info {
+        text-align: center;
+        color: #bbb;
+        margin-top: 15px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease-out;
+      }
+
+      .profile-card:hover .profile-info {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .profile-info p {
+        margin: 8px 0;
+        font-size: 16px;
+      }
+
+      /* Make layout responsive */
+      @media (max-width: 768px) {
+        .profile-card-container {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .profile-card-container .col-lg-6 {
+          max-width: 100%;
+        }
+      }
+    </style>
+
+    <!-- Add animations on scroll -->
+    <script>
+      // Initialize AOS (Animation on Scroll)
+      AOS.init();
+    </script>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <!-- AOS (Animation on Scroll) -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.min.js"></script>
+
+    <!-- Particle.js -->
+    <script>
+      particlesJS("particles-js", {
+        particles: {
+          number: {
+            value: 80,
+            density: {
+              enable: true,
+              value_area: 800,
+            },
+          },
+          color: {
+            value: "#ffffff",
+          },
+          shape: {
+            type: "circle",
+          },
+          opacity: {
+            value: 0.5,
+            random: true,
+            anim: {
+              enable: true,
+              speed: 1,
+              opacity_min: 0.1,
+              sync: false,
+            },
+          },
+          size: {
+            value: 3,
+            random: true,
+            anim: {
+              enable: true,
+              speed: 40,
+              size_min: 0.1,
+              sync: false,
+            },
+          },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#ffffff",
+            opacity: 0.4,
+            width: 1,
+          },
+        },
+      });
+    </script>
+
+    <script>
+      // Initialize AOS (Animation on Scroll)
+      AOS.init();
+
+      // Add event listener for profile hover actions
+      document.querySelectorAll(".profile-card").forEach((card) => {
+        card.addEventListener("mouseenter", () => {
+          card.classList.add("hover");
+        });
+        card.addEventListener("mouseleave", () => {
+          card.classList.remove("hover");
+        });
+      });
+    </script>
+  </body>
+</html>

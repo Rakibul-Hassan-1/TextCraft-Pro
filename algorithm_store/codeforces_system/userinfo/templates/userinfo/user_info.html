@@ -1,0 +1,20 @@
+<!-- user_info.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Info - Codeforces</title>
+  </head>
+  <body>
+    <h1>Codeforces User Info</h1>
+
+    <h2>{{ user_info.handle }}</h2>
+    <p><strong>Rank:</strong> {{ user_info.rank }}</p>
+    <p><strong>Rating:</strong> {{ user_info.rating }}</p>
+    <p><strong>Max Rating:</strong> {{ user_info.maxRating }}</p>
+    <p><strong>Contribution:</strong> {{ user_info.contribution }}</p>
+
+    <a href="{% url 'index' %}">Search another user</a>
+  </body>
+</html>
