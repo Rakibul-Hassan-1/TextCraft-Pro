@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Projects</h1>
+        <nav>
+            <a href="/">Back to Dashboard</a>
+        </nav>
+    </header>
+    <section class="project-list">
+        <h2>Available Projects</h2>
+        <ul>
+            <!-- Example Project -->
+            <li><a href="/projects/1/">Project 1</a></li>
+            <li><a href="/projects/2/">Project 2</a></li>
+        </ul>
+    </section>
+    <footer>
+        <p>&copy; 2025 Multi-User Drawing Tools</p>
+    </footer>
+</body>
+</html>

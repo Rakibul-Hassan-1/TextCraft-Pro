@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Collaborative Canvas</h1>
+        <nav>
+            <a href="/">Back to Dashboard</a>
+        </nav>
+    </header>
+    <section class="canvas-container">
+        <div id="canvas" class="drawing-canvas">
+            <!-- Canvas will be rendered here -->
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2025 Multi-User Drawing Tools</p>
+    </footer>
+</body>
+</html>

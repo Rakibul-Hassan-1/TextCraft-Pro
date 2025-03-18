@@ -1,0 +1,19 @@
+{% load messages %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message">
+                <p>{{ message }}</p>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <h1>Welcome to the Home Page!</h1>
+</body>
+</html>

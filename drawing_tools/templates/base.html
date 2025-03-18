@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Drawing Tools{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Multi-User Drawing Tools</h1>
+
+        {% if user.is_authenticated %}
+            <p>Welcome, {{ user.username }}!</p>
+            <!-- Logout Button -->
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <p><a href="{% url 'login' %}">Login</a> | <a href="{% url 'register' %}">Register</a></p>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </header>
+</body>
+</html>

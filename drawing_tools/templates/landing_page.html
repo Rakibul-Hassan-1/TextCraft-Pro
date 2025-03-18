@@ -1,0 +1,34 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-User Drawing Tools</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Multi-User Drawing Tools</h1>
+        <p>Collaborate in real-time, create, and share drawings with your team!</p>
+        <nav>
+            <a href="/accounts/login/">Login</a> |
+            <a href="/accounts/register/">Register</a>
+        </nav>
+    </header>
+    <section class="intro">
+        <h2>Features</h2>
+        <ul>
+            <li>Real-time collaboration on drawings</li>
+            <li>Customizable drawing tools</li>
+            <li>Integrated chat and conferencing</li>
+            <li>Save and load your projects</li>
+        </ul>
+    </section>
+    <footer>
+        <p>&copy; 2025 Multi-User Drawing Tools. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1 @@
+{"name":"Local: tes","url":"d:\\Ja iccah korbo ami\\tes.cpp","tests":[{"id":1737044721015,"input":"10\n0011\n1010\n1100\n0101\n0001\n0111\n0110\n100101\n1110010\n0001011011","output":"YES\nYES\nYES\nYES\nNO\nNO\nYES\nYES\nNO\nYES"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Ja iccah korbo ami\\tes.cpp","group":"local","local":true}
