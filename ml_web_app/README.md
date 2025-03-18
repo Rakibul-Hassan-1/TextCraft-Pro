@@ -1,0 +1,11 @@
+# Project Structure:
+# - ml_web_app/
+#   - static/
+#     - style.css
+#     - script.js
+#   - templates/
+#     - index.html
+#   - model/
+#     - model.py
+#   - app.py
+#   - README.md
